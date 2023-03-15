@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:dev.sqlite"
+}
+
+// B1 and B2 are identical except the order of relation fields.
+
+// Nullable field first
+model B1 {
+  bid  Int  @id
+  b2fk Int?
+  b2rf A1?  @relation(name: "b1_to_a1_opt", fields: [b2fk], references: [aid])
+  bfk  Int
+  brf  A1   @relation(fields: [bfk], references: [aid])
+}
+
+model A1 {
+  aid  Int  @id
+  arf  B1[]
+  arf2 B1[] @relation("b1_to_a1_opt")
+}
+
+// Non-nullable field first
+model B2 {
+  bid  Int  @id
+  bfk  Int
+  brf  A2   @relation(fields: [bfk], references: [aid])
+  b2fk Int?
+  b2rf A2?  @relation(name: "b2_to_a2_opt", fields: [b2fk], references: [aid])
+}
+
+model A2 {
+  aid  Int  @id
+  arf  B2[]
+  arf2 B2[] @relation("b2_to_a2_opt")
+}

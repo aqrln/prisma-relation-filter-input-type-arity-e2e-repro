@@ -1,0 +1,14 @@
+{
+  "name": "prisma-relation-filter-input-type-arity-e2e-repro",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.11.0"
+  },
+  "devDependencies": {
+    "prisma": "^4.11.0",
+    "ts-node": "^10.9.1"
+  }
+}
